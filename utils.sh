@@ -580,10 +580,9 @@ patch_apk() {
 	# TODO: remove this later
 	local cli_name
 	cli_name=$(basename "$cli_jar")
-	if [ "${cli_name::8}" = revanced ]; then
-		cmd+=" -b"
-		if [ "$OS" = Android ]; then cmd+=" --custom-aapt2-binary='${AAPT2}'"; fi
-	fi
+	if [ "${cli_name::8}" = revanced ]; then cmd+=" -b"; fi
+
+	# if [ "$OS" = Android ]; then cmd+=" --custom-aapt2-binary='${AAPT2}'"; fi
 	pr "$cmd"
 	if eval "$cmd"; then [ -f "$patched_apk" ]; else
 		rm "$patched_apk" 2>/dev/null || :
