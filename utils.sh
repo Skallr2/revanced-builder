@@ -139,6 +139,7 @@ get_prebuilts() {
 			gh_dl "$file" "$url" >&2 || return 1
 			echo "$tag: ${src}/${name}  " >>"${cl_dir}/changelog.md"
 		else
+			local grab_cl="false"
 			name=$(basename "$file")
 			tag_name=$(cut -d'-' -f2- <<<"$name")
 			tag_name=v${tag_name%.*}

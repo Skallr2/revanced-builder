@@ -135,19 +135,17 @@ jobs:
               MODULES+="${NL}📦 [${OUTPUT}](${DL_URL})"
             fi
           done
-          MODULES=${MODULES#"$NL"}
-          APKS=${APKS#"$NL"}
+          MODULES="Modules:${NL}${MODULES#"$NL"}"
+          APKS="APKs:${NL}${APKS#"$NL"}"
 
-          BODY="$(sed 's/^\* \*\*/↪ \*\*/g; s/^\* `/↪ \*\*/g; s/`/\*/g; s/^\* /\↪/g; s/\*\*/\*/g; s/###//g; s/^- /↪ /g; /^==/d;' ../build.md)"
+          BODY="$(cat ../build.md)"
           MSG="*New Build Released! 🎉*
 
           ${BODY}
 
           *▼ Download Links:*
-          *Modules:*
           ${MODULES}
 
-          *APKs:*
           ${APKS}
 
           *By @peternoz*
