@@ -135,8 +135,11 @@ jobs:
               MODULES+="${NL}📦 [${OUTPUT}](${DL_URL})"
             fi
           done
-          MODULES="Modules:${NL}${MODULES#"$NL"}"
-          APKS="APKs:${NL}${APKS#"$NL"}"
+          if [ -n "$MODULES" ]; then
+            MODULES="Modules:${NL}${MODULES#"$NL"}"
+            if [ -n "$APKS" ]; then MODULES+=${NL}${NL}; fi
+          fi
+          if [ -n "$APKS" ]; then APKS="APKs:${NL}${APKS#"$NL"}"; fi
 
           BODY="$(cat ../build.md)"
           MSG="*New Build Released! 🎉*
@@ -144,9 +147,7 @@ jobs:
           ${BODY}
 
           *▼ Download Links:*
-          ${MODULES}
-
-          ${APKS}
+          ${MODULES}${APKS}
 
           *By @peternoz*
 
