@@ -753,11 +753,15 @@ build_rv() {
 			patched_apk="${TEMP_DIR}/${app_name_l}-${rv_brand_f}-${version_f}-${arch_f}.apk"
 		fi
 		if [ -n "$microg_patch" ]; then
-			if [ "$build_mode" = apk ]; then
+			if [ "$build_mode" = "apk" ]; then
 				patcher_args+=("-e \"${microg_patch}\"")
-			elif [ "$build_mode" = module ]; then
+			elif [ "$build_mode" = "module" ]; then
 				patcher_args+=("-d \"${microg_patch}\"")
 			fi
+		fi
+
+		if [ "${args[enable_update_checks]}" = "true" ] && [ "$build_mode" = "apk" ]; then
+			patcher_args+=("-p ${BIN_DIR}/jhc-update-check.mpp -e 'j-hc Update Check'")
 		fi
 
 		local stock_apk_to_patch="${stock_apk}.stripped.apk"
