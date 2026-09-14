@@ -1,5 +1,6 @@
 "disable_drc_audio": true,
 "external_downloader_action_button": true,
+"external_downloader_flyout_menu": true,
 "music_change_miniplayer_color": true,
 "music_enable_forced_miniplayer": true,
 "music_enable_swipe_to_dismiss_miniplayer": true,
